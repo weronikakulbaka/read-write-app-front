@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Product } from '../models/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +13,8 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  importData(): Observable<string> {
-    
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'text/plain, */*',
-        'Content-Type': 'application/json'
-      }),
-      responseType: 'text' as 'json'
-    };
-
-    return this.http.post<string>(`${this.endpoint}/upload`, "", httpOptions);
+  importData(): Observable<Product[]> {
+    return this.http.post<Product[]>(`${this.endpoint}/upload`, {product:"dell"});
   }
 
 }

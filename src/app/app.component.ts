@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Product } from './models/Product';
 import { FileService } from './services/file.service';
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ import { FileService } from './services/file.service';
 export class AppComponent implements OnInit{
 
   title = 'read-write-app';
-  importedData$: Observable<string>;
+  importedData$: Observable<Product[]>;
 
   constructor( private fileService: FileService ){}
 

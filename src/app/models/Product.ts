@@ -1,0 +1,15 @@
+export interface Product {
+    Producent : string,
+    Matryca : string,
+    Rozdzielczosc: string,
+    TypMatrycy: string,
+    LiczbaRdzeniFizycznych: string,
+    Taktowanie : string,
+    RAM : string,
+    PojemnoscDysku : string,
+    TypDysku : string,
+    KartaGraficzna : string,
+    PamiecKartyGraficznej : string,
+    SystemOperacyjny : string,
+    NapedOptyczny : string,
+}
