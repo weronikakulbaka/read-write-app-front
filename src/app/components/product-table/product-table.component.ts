@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-product-table',
@@ -9,29 +10,31 @@ import { Product } from 'src/app/models/Product';
 })
 export class ProductTableComponent implements OnInit {
 
-  @Input() product: Product;
+  @Input() product: Product[];
   displayedColumns: string[] = [
     'Producent', 
     'Matryca',
     'Rozdzielczosc',
     'TypMatrycy',
-    'LiczbaRdzeniFizycznych',
-    'Taktowanie',
+    'DotykowyEkran',
+    'CPU',
+    'IloscRdzeni',
+    'MHZ',
     'RAM',
     'PojemnoscDysku',
-    'TypDysku',
-    'KartaGraficzna',
-    'PamiecKartyGraficznej',
+    'RodzajDysku',
+    'GPU',
+    'VRAM',
     'SystemOperacyjny',
     'NapedOptyczny',
   ];
-  constructor() { }
+  constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
   }
 
-  send(form: NgForm):void{
-    console.log(this.product);
+  send():void{
+    this.fileService.importData(this.product).subscribe();
   }
 
 }

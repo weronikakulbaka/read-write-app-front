@@ -1,13 +1,17 @@
+<div *ngIf="product">
 <form #form="ngForm" (ngSubmit)="send(form)">
+<button mat-button color="accent" type="submit" [disabled]="!form.valid" (click)="send()">Zapisz dane do pliku txt</button>
 <table mat-table [dataSource]="product" class="mat-elevation-z8">
 
   <ng-container matColumnDef="Producent">
     <th mat-header-cell *matHeaderCellDef> Producent </th>
     <td mat-cell *matCellDef="let element;let i = index;">
         <mat-form-field class="example-full-width">
-            <input matInput [value]="element.Producent" [(ngModel)]="element.Producent" attr.name="{{element.Producent}}{{i}}" name="{{element.Producent}}{{i}}">
-        </mat-form-field>
-         <!-- {{element.Producent}}  -->
+            <input matInput type="text" pattern="^[a-zA-Z\s]*$" [value]="element.Producent" [(ngModel)]="element.Producent" attr.name="{{element.Producent}}{{i}}" name="{{element.Producent}}{{i}}" #nameModel="ngModel">
+            <mat-error *ngIf="nameModel.invalid">
+              Można używać tylko litery
+            </mat-error>
+          </mat-form-field>
         </td>
   </ng-container>
 
@@ -31,57 +35,121 @@
 
   <ng-container matColumnDef="TypMatrycy">
     <th mat-header-cell *matHeaderCellDef> Typ Matrycy </th>
-    <td mat-cell *matCellDef="let element"> {{element.TypMatrycy}} </td>
+    <td mat-cell *matCellDef="let element;let i = index;"> 
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.Matryca" [(ngModel)]="element.TypMatrycy"  attr.name="{{element.TypMatrycy}}{{i}}" name="{{element.TypMatrycy}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="LiczbaRdzeniFizycznych">
-    <th mat-header-cell *matHeaderCellDef> Liczba Rdzeni Fizycznych </th>
-    <td mat-cell *matCellDef="let element"> {{element.LiczbaRdzeniFizycznych}} </td>
+  <ng-container matColumnDef="DotykowyEkran">
+    <th mat-header-cell *matHeaderCellDef> Dotykowy Ekran </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.DotykowyEkran" [(ngModel)]="element.DotykowyEkran"  attr.name="{{element.DotykowyEkran}}{{i}}" name="{{element.DotykowyEkran}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="Taktowanie">
-    <th mat-header-cell *matHeaderCellDef> Taktowanie </th>
-    <td mat-cell *matCellDef="let element"> {{element.Taktowanie}} </td>
+  <ng-container matColumnDef="CPU">
+    <th mat-header-cell *matHeaderCellDef> CPU </th>
+    <td mat-cell *matCellDef="let element"> 
+      <mat-form-field class="example-full-width; let i = index;">
+        <input matInput [value]="element.CPU" [(ngModel)]="element.CPU"  attr.name="{{element.CPU}}{{i}}" name="{{element.CPU}}{{i}}"> 
+      </mat-form-field> 
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="IloscRdzeni">
+    <th mat-header-cell *matHeaderCellDef> Ilosc Rdzeni </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.IloscRdzeni" type="text" pattern="\d+" [(ngModel)]="element.IloscRdzeni"  attr.name="{{element.IloscRdzeni}}{{i}}" name="{{element.IloscRdzeni}}{{i}}" #iloscRdzeniModel="ngModel">
+        <mat-error *ngIf="iloscRdzeniModel.invalid">
+          Błędne dane
+        </mat-error> 
+      </mat-form-field> 
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="MHZ">
+    <th mat-header-cell *matHeaderCellDef> MHZ </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.MHZ" type="text" pattern="\d+" [(ngModel)]="element.MHZ"  attr.name="{{element.MHZ}}{{i}}" name="{{element.MHZ}}{{i}}"#MHZModel="ngModel">
+        <mat-error *ngIf="MHZModel.invalid">
+          Błędne dane
+        </mat-error> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="RAM">
     <th mat-header-cell *matHeaderCellDef> RAM </th>
-    <td mat-cell *matCellDef="let element"> {{element.RAM}} </td>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.RAM" [(ngModel)]="element.RAM"  attr.name="{{element.RAM}}{{i}}" name="{{element.RAM}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
+ 
   <ng-container matColumnDef="PojemnoscDysku">
     <th mat-header-cell *matHeaderCellDef> Pojemność Dysku </th>
-    <td mat-cell *matCellDef="let element"> {{element.PojemnoscDysku}} </td>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.PojemnoscDysku" [(ngModel)]="element.PojemnoscDysku"  attr.name="{{element.PojemnoscDysku}}{{i}}" name="{{element.PojemnoscDysku}}{{i}}"> 
+      </mat-form-field> 
+    </td>
+  </ng-container>
+ 
+  <ng-container matColumnDef="RodzajDysku">
+    <th mat-header-cell *matHeaderCellDef> Rodzaj Dysku </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.RodzajDysku" [(ngModel)]="element.RodzajDysku"  attr.name="{{element.RodzajDysku}}{{i}}" name="{{element.RodzajDysku}}{{i}}"> 
+      </mat-form-field> 
+    </td>
+  </ng-container>
+ 
+  <ng-container matColumnDef="GPU">
+    <th mat-header-cell *matHeaderCellDef> GPU </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.GPU" [(ngModel)]="element.GPU"  attr.name="{{element.GPU}}{{i}}" name="{{element.GPU}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="TypDysku">
-    <th mat-header-cell *matHeaderCellDef> Typ Dysku </th>
-    <td mat-cell *matCellDef="let element"> {{element.TypDysku}} </td>
+  <ng-container matColumnDef="VRAM">
+    <th mat-header-cell *matHeaderCellDef> VRAM </th>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.VRAM" [(ngModel)]="element.VRAM"  attr.name="{{element.VRAM}}{{i}}" name="{{element.VRAM}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
- 
-  <ng-container matColumnDef="KartaGraficzna">
-    <th mat-header-cell *matHeaderCellDef> Karta Graficzna </th>
-    <td mat-cell *matCellDef="let element"> {{element.KartaGraficzna}} </td>
-  </ng-container>
- 
-  <ng-container matColumnDef="PamiecKartyGraficznej">
-    <th mat-header-cell *matHeaderCellDef> Pamięć Karty Graficznej </th>
-    <td mat-cell *matCellDef="let element"> {{element.PamiecKartyGraficznej}} </td>
-  </ng-container>
- 
   <ng-container matColumnDef="SystemOperacyjny">
     <th mat-header-cell *matHeaderCellDef> System Operacyjny </th>
-    <td mat-cell *matCellDef="let element"> {{element.SystemOperacyjny}} </td>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.SystemOperacyjny" [(ngModel)]="element.SystemOperacyjny"  attr.name="{{element.SystemOperacyjny}}{{i}}" name="{{element.SystemOperacyjny}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="NapedOptyczny">
     <th mat-header-cell *matHeaderCellDef> Napęd Optyczny </th>
-    <td mat-cell *matCellDef="let element"> {{element.NapedOptyczny}} </td>
+    <td mat-cell *matCellDef="let element; let i = index;">
+      <mat-form-field class="example-full-width">
+        <input matInput [value]="element.NapedOptyczny" [(ngModel)]="element.NapedOptyczny"  attr.name="{{element.NapedOptyczny}}{{i}}" name="{{element.NapedOptyczny}}{{i}}"> 
+      </mat-form-field> 
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button type="submit" class="btn btn-success" >Dodaj</button>
 </form>
+</div>

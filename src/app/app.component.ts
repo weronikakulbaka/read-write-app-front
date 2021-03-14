@@ -15,8 +15,12 @@ export class AppComponent implements OnInit{
 
   constructor( private fileService: FileService ){}
 
-  ngOnInit(){
-    this.importedData$ = this.fileService.importData();
+  ngOnInit(): void {
+   
+  }
+
+  readData(): void {
+    this.importedData$ = this.fileService.importData(null);
   }
   
 }

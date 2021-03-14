@@ -13,8 +13,9 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  importData(): Observable<Product[]> {
-    return this.http.post<Product[]>(`${this.endpoint}/upload`, {product:"dell"});
+  importData(newdata: Product[]): Observable<Product[]> {
+    const sendData = (newdata == null ? {} : newdata);
+    return this.http.post<Product[]>(`${this.endpoint}/upload`, sendData);
   }
 
 }

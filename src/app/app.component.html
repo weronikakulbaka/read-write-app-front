@@ -1,3 +1,10 @@
-<!-- <div *ngFor="let data of importedData$ | async"> -->
-    <app-product-table [product]="importedData$ | async"></app-product-table>
-<!-- </div> -->
+<div>
+    <button mat-raised-button color="accent" (click)="readData()">Wczytaj dane z pliku txt</button>
+    <div *ngIf="importedData$; else empty">
+        <app-product-table [product]="importedData$ | async"></app-product-table>
+    </div>
+    <ng-template #empty>
+        <div>Nie wczytano danych</div>
+    </ng-template>
+</div>
+
