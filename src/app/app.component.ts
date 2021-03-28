@@ -19,8 +19,12 @@ export class AppComponent implements OnInit{
    
   }
 
-  readData(): void {
-    this.importedData$ = this.fileService.importData(null);
+  readTXTData(): void {
+    this.importedData$ = this.fileService.importTXTData();
+  }
+
+  readXMLData(): void {
+    this.importedData$ = this.fileService.importXMLData();
   }
   
 }

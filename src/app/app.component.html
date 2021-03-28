@@ -1,5 +1,6 @@
 <div>
-    <button mat-raised-button color="accent" (click)="readData()">Wczytaj dane z pliku txt</button>
+    <button mat-raised-button color="accent" (click)="readTXTData()">Wczytaj dane z pliku txt</button>
+    <button mat-raised-button color="accent" (click)="readXMLData()">Wczytaj dane z pliku xml</button>
     <div *ngIf="importedData$; else empty">
         <app-product-table [product]="importedData$ | async"></app-product-table>
     </div>

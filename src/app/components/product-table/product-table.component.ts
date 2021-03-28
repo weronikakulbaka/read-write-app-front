@@ -33,8 +33,15 @@ export class ProductTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  send():void{
-    this.fileService.importData(this.product).subscribe();
+  send(id: number):void{
+    console.log(id);
+    if(id == 1 ){
+      this.fileService.saveXMLData(this.product).subscribe();
+    } else if(id == 2){
+      this.fileService.saveTXTData(this.product).subscribe();
+    }
+    
+    
   }
 
 }
